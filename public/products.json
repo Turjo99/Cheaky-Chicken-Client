@@ -3,36 +3,42 @@
     "name": "Chicken Strips",
     "price": 20,
     "rating": "4.5",
+    "description": "Crispy chicken stripes served with french fries and house special sauce",
     "img": "https://img.freepik.com/free-photo/top-view-fried-chicken-french-fries_140725-114902.jpg?w=1380&t=st=1667846725~exp=1667847325~hmac=c08e3ba45c569bee8655a698b6d1ee8cdbd008cee955d5641a3abdcfcc18ea5c"
   },
   {
     "name": "Baked Whole Chicken",
     "price": 18,
     "rating": "4.9",
+    "description": "baked whole chicken served with french fries and house special sauce",
     "img": "https://img.freepik.com/free-photo/baked-quails-pan-dark-surface_2829-5596.jpg?w=1380&t=st=1667846808~exp=1667847408~hmac=ce6f6e7150f9405094c749577fabe4a5b66cffaf82e20bf0bc3f39b879b0bb6f"
   },
   {
     "name": "Chicken Wings",
     "price": 20,
     "rating": "4.5",
+    "description": "Crispy chicken wings served with french fries and and bbq sauce",
     "img": "https://img.freepik.com/free-photo/shot-white-plate-full-fried-chicken_181624-23629.jpg?w=996&t=st=1667846881~exp=1667847481~hmac=53060e7b6fb296064647eec569dc0bed6b724ba53489cba089eb5f62fbfaf920"
   },
   {
     "name": "Chicken Classic Burger",
     "price": 25,
     "rating": "4.5",
+    "description": "Chicken Classic Burger served with chilled Mojito",
     "img": "https://img.freepik.com/free-photo/front-view-yummy-meat-cheeseburger-with-french-fries-dark-background-dinner-burgers-snack-fast-food-sandwich-salad-dish-toast_140725-159215.jpg?w=1380&t=st=1667846947~exp=1667847547~hmac=76bd79a2faf78e05a0db4bac74ede1fb70b07a95985ef3e3b32edbfd490de589"
   },
   {
     "name": "Chicken Nuggets",
     "price": 20,
     "rating": "4.5",
+    "description": "Chicken Nuggets served with house special sauce",
     "img": "https://img.freepik.com/free-photo/side-view-chicken-sticks-with-nuggets-french-fries-lettuce-leaf_141793-4857.jpg?w=1380&t=st=1667847009~exp=1667847609~hmac=2fe17587ad272c7bac564c38e9b32b2bf47bb12e776a0f7635778ed9e43e252e"
   },
   {
     "name": "Chicken Supreme Sandwitch",
     "price": 20,
     "rating": "4.5",
+    "description": "Chicken Supreme Sandwitch prepared with chicken,onions,pickle and house special sauce",
     "img": "https://img.freepik.com/free-photo/side-view-chicken-doner-grilled-chicken-with-cucumber-tomato-greens-red-onion-sauce-bread_141793-4822.jpg?t=st=1667847052~exp=1667847652~hmac=42b798b6f28c2eabdc5fabd82556aa95f77b04d21c79f4f3478d9b5cb9e13a11"
   }
 ]
