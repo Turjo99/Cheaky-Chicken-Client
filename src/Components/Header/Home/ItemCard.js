@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ItemCard = ({ item }) => {
-  const { name, img, description } = item;
+  const { _id, name, img, description } = item;
   return (
     <div>
       <div className="card card-compact w-96 bg-base-100 shadow-xl">
@@ -12,7 +12,7 @@ const ItemCard = ({ item }) => {
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
           <p>{description}</p>
-          <Link to={""} className="card-actions justify-end">
+          <Link to={`/allItems/${_id}`} className="card-actions justify-end">
             <button className="btn btn-primary">Buy Now</button>
           </Link>
         </div>
