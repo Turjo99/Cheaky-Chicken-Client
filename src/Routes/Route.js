@@ -5,6 +5,7 @@ import Home from "../Components/Header/Home/Home";
 import AllItem from "../Components/Items/AllItem";
 import ItemDetail from "../Components/Items/ItemDetail";
 import Main from "../Components/Main/Main";
+import MyReviews from "./MyReviews";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "/myreviews",
+        element: <MyReviews></MyReviews>,
       },
     ],
   },

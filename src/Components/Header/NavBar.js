@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/UserContext";
 
 const NavBar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        console.log("Sign Out successfully");
+      })
+      .catch((error) => console.error(error));
+  };
   return (
     <div>
       <div className="navbar bg-base-100 text-4xl">
@@ -47,6 +56,10 @@ const NavBar = () => {
               <Link to={"/login"}>
                 <li>Login</li>
               </Link>
+
+              <Link to={"/signup"}>
+                <li>Signup</li>
+              </Link>
             </ul>
           </div>
           <Link to={"/"} className="btn btn-ghost normal-case text-5xl">
@@ -60,21 +73,36 @@ const NavBar = () => {
                 <li>Menu</li>
               </Link>
             </li>
-            <li tabIndex={0}>
-              <Link to={"/login"}>
-                <li>Login</li>
-              </Link>
-            </li>
-            <li tabIndex={0}>
-              <Link to={"/signup"}>
-                <li>Signup</li>
-              </Link>
-            </li>
+            {user?.uid ? (
+              <>
+                <li tabIndex={0}>
+                  <Link to={"/myreviews"}>
+                    <li>My Reviews</li>
+                  </Link>
+                </li>
+                <li tabIndex={0} onClick={handleLogOut}>
+                  <Link to={"/allItems"}>
+                    <li>Logout</li>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li tabIndex={0}>
+                  <Link to={"/login"}>
+                    <li>Login</li>
+                  </Link>
+                </li>
+                <li tabIndex={0}>
+                  <Link to={"/signup"}>
+                    <li>Signup</li>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Get started</a>
-        </div>
+        <div className="navbar-end">{user?.uid && <>{user.displayName}</>}</div>
       </div>
     </div>
   );

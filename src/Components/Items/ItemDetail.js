@@ -1,36 +1,54 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../Context/UserContext";
 
 const ItemDetail = () => {
-  const [review, setReview] = useState({});
+  const { user } = useContext(AuthContext);
+  const ema = user.uid;
+  // const [review, setReview] = useState({});
   const item = useLoaderData();
   const { img, _id, description, name, price, rating } = item;
   console.log(item);
+  const itemID = _id;
+
   const handleReview = (event) => {
     event.preventDefault();
+    const userName = event.target.name.value;
+    const email = user?.email || "unregistered";
+    const userReview = event.target.review.value;
+    console.log(userName, userReview);
+    const reviews = {
+      itemID,
+      email,
+      name,
+      price,
+      userName,
+
+      userReview,
+    };
     fetch("http://localhost:5000/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(review),
+      body: JSON.stringify(reviews),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          alert("user added successfully");
+          alert("Thanks for your review");
         }
       });
   };
-  const handleBlur = (event) => {
-    const field = event.target.name;
-    const value = event.target.value;
-    const newReview = { ...review, _id };
-    newReview[field] = value;
-    setReview(newReview);
-  };
-  console.log(review);
+  // const handleBlur = (event) => {
+  //   const field = event.target.name;
+  //   const value = event.target.value;
+  //   const newReview = { ...review, _id, userID };
+  //   newReview[field] = value;
+  //   setReview(newReview);
+  // };
+  // console.log(reviews);
   return (
     <div className="container mx-auto">
       <div className="">
@@ -58,22 +76,22 @@ const ItemDetail = () => {
                 placeholder="Jhankar Mahbub"
                 className="input input-bordered text-4xl"
                 name="name"
-                onBlur={handleBlur}
+                // onBlur={handleBlur}
               />
             </label>
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Your Number</span>
+              <span className="label-text">Email</span>
             </label>
             <label className="input-group">
-              <span>Phone</span>
+              <span>Email</span>
               <input
-                type="text"
-                placeholder="12345678"
+                type="email"
+                defaultValue={user?.email}
                 className="input input-bordered text-4xl"
-                name="phone"
-                onBlur={handleBlur}
+                name="email"
+                // onBlur={handleBlur}
               />
             </label>
           </div>
@@ -83,7 +101,7 @@ const ItemDetail = () => {
             className="textarea w-full  textarea-secondary text-4xl"
             placeholder="your Review"
             name="review"
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
           ></textarea>
         </div>
         <div className="text-center">

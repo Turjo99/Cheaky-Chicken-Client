@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/UserContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { loginUser } = useContext(AuthContext);
+  const login = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const from = location.state?.from?.pathname || "/"; //redirect user if came from any specific private route
+    console.log(email);
+    loginUser(email, password)
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      // handling error message
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div>
       <div className="hero  bg-base-200 my-10 py-5">
@@ -14,7 +36,7 @@ const Login = () => {
           </div>
           <div className="  w-full  shadow-2xl bg-base-100 ">
             <h1 className="text-5xl font-bold text-center">Login now!</h1>
-            <div className="card-body ">
+            <form className="" onSubmit={login}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-5xl">Email</span>
@@ -23,6 +45,7 @@ const Login = () => {
                   type="text"
                   placeholder="email"
                   className="input input-bordered text-5xl"
+                  name="email"
                 />
               </div>
               <div className="form-control">
@@ -33,6 +56,7 @@ const Login = () => {
                   type="text"
                   placeholder="password"
                   className="input input-bordered text-5xl"
+                  name="password"
                 />
                 <label className="label">
                   <a
@@ -46,7 +70,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
