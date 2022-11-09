@@ -11,7 +11,7 @@ const Items = () => {
   }, []);
   console.log(items);
   return (
-    <div className="container my-10 mx-auto bg-slate-700 p-5">
+    <div className="container my-10 mx-auto bg-slate-900 p-5">
       <h1 className="text-center text-6xl mb-8">Our Menu</h1>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {items.map((item) => (

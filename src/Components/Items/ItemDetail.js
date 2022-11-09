@@ -36,27 +36,27 @@ const ItemDetail = () => {
       <div className="">
         <img src={img} className="object-contain mx-auto lg:w-2/3" alt="" />
         <div className="text-center">
-          <h1 className="text-6xl my-6">{name}</h1>
-          <p>{description}</p>
+          <h1 className="text-8xl my-6">{name}</h1>
+          <p className="text-5xl">{description}</p>
           <div className="my-6 flex justify-around ">
-            <div className="text-2xl">Price: ${price}</div>
-            <div className="text-2xl">Rating {rating}</div>
+            <div className="text-4xl">Price: ${price}</div>
+            <div className="text-4xl">Rating {rating}</div>
           </div>
         </div>
       </div>
       <form onSubmit={handleReview} className="reviews">
         <h1 className="text-center text-6xl my-8">Add a Review</h1>
-        <div className="flex justify-center">
-          <div className="form-control mr-7">
+        <div className="lg:flex justify-center text-4xl">
+          <div className="form-control mr-7 ">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
-            <label className="input-group">
+            <label className="input-group ">
               <span>Name</span>
               <input
                 type="text"
                 placeholder="Jhankar Mahbub"
-                className="input input-bordered"
+                className="input input-bordered text-4xl"
                 name="name"
                 onBlur={handleBlur}
               />
@@ -71,7 +71,7 @@ const ItemDetail = () => {
               <input
                 type="text"
                 placeholder="12345678"
-                className="input input-bordered"
+                className="input input-bordered text-4xl"
                 name="phone"
                 onBlur={handleBlur}
               />
@@ -80,7 +80,7 @@ const ItemDetail = () => {
         </div>
         <div className="text-center my-8">
           <textarea
-            className="textarea w-2/3 textarea-secondary"
+            className="textarea w-full  textarea-secondary text-4xl"
             placeholder="your Review"
             name="review"
             onBlur={handleBlur}

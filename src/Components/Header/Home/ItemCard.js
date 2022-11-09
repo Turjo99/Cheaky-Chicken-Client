@@ -10,8 +10,8 @@ const ItemCard = ({ item }) => {
           <img src={img} alt="Shoes" className=" h-56 w-full" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{name}</h2>
-          <p>{description}</p>
+          <h2 className="card-title text-5xl">{name}</h2>
+          <p className="card-title text-3xl">{description}</p>
           <Link to={`/allItems/${_id}`} className="card-actions justify-end">
             <button className="btn btn-primary">Buy Now</button>
           </Link>
