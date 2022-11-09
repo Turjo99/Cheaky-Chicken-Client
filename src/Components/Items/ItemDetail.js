@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const ItemDetail = () => {
   const { user } = useContext(AuthContext);
-  const ema = user.uid;
+
   // const [review, setReview] = useState({});
   const item = useLoaderData();
-  const { img, _id, description, name, price, rating } = item;
+  const { img, _id, description, name, price } = item;
   console.log(item);
   const itemID = _id;
 
@@ -41,6 +41,9 @@ const ItemDetail = () => {
         }
       });
   };
+  useEffect(() => {
+    fetch(``);
+  }, []);
   // const handleBlur = (event) => {
   //   const field = event.target.name;
   //   const value = event.target.value;
@@ -58,7 +61,7 @@ const ItemDetail = () => {
           <p className="text-5xl">{description}</p>
           <div className="my-6 flex justify-around ">
             <div className="text-4xl">Price: ${price}</div>
-            <div className="text-4xl">Rating {rating}</div>
+            <div className="text-4xl">Rating {item?.rating}</div>
           </div>
         </div>
       </div>

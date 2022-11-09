@@ -76,6 +76,11 @@ const NavBar = () => {
             {user?.uid ? (
               <>
                 <li tabIndex={0}>
+                  <Link to={"/addItem"}>
+                    <li>Add a Item</li>
+                  </Link>
+                </li>
+                <li tabIndex={0}>
                   <Link to={"/myreviews"}>
                     <li>My Reviews</li>
                   </Link>
