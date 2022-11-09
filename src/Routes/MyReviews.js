@@ -12,6 +12,25 @@ const MyReviews = () => {
         setUserReview(data);
       });
   }, [user?.email]);
+  const handleDelete = (id) => {
+    const proceed = window.confirm(
+      "Are you sure, you want to cancel this order"
+    );
+    if (proceed) {
+      fetch(`http://localhost:5000/user/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("deleted successfully");
+            const remaining = userReview.filter((rvw) => rvw._id !== id);
+            setUserReview(remaining);
+          }
+        });
+    }
+  };
+  console.log(userReview);
 
   return (
     <div className="overflow-x-auto w-full">
@@ -28,7 +47,11 @@ const MyReviews = () => {
         </thead>
         <tbody>
           {userReview.map((review) => (
-            <UserReview key={user._id} review={review}></UserReview>
+            <UserReview
+              key={user._id}
+              review={review}
+              handleDelete={handleDelete}
+            ></UserReview>
           ))}
         </tbody>
       </table>

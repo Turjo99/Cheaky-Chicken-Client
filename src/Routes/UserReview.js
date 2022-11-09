@@ -1,14 +1,16 @@
 import React from "react";
 
-const UserReview = ({ review }) => {
-  const { price, userReview, userName, name } = review;
+const UserReview = ({ review, handleDelete }) => {
+  const { _id, itemID, price, userReview, userName, name } = review;
   console.log(price, userReview, userName, name);
 
   return (
     <tr>
       <th>
         <label>
-          <button className="btn btn-ghost">X</button>
+          <button onClick={() => handleDelete(_id)} className="btn btn-ghost">
+            X
+          </button>
         </label>
       </th>
       <td>
