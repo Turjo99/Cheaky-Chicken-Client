@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const ItemCard = ({ item }) => {
   const { _id, name, img, description } = item;
@@ -7,7 +8,13 @@ const ItemCard = ({ item }) => {
     <div>
       <div className="card card-compact w-96 bg-base-100 shadow-xl">
         <figure>
-          <img src={img} alt="Shoes" className=" h-56 w-full" />
+          <PhotoProvider>
+            <div className="foo">
+              <PhotoView src={img}>
+                <img src={img} alt="" />
+              </PhotoView>
+            </div>
+          </PhotoProvider>
         </figure>
         <div className="card-body">
           <h2 className="card-title text-5xl">{name}</h2>
