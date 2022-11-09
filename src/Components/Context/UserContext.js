@@ -1,10 +1,9 @@
 import React from "react";
 import { createContext } from "react";
-import { app } from "../Firebase/firebase.init";
+
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  GithubAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -13,6 +12,8 @@ import {
 } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react";
+import app from "../Firebase/firebase.init";
+
 const auth = getAuth(app);
 
 export const AuthContext = createContext();
@@ -57,7 +58,6 @@ const UserContext = ({ children }) => {
     logout,
     loading,
     updateUserProfile,
-    githubSignIn,
   };
   return (
     <div>

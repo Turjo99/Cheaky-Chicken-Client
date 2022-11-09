@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Context/UserContext";
 
 const Signup = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const register = (event) => {
     event.preventDefault();
 
@@ -9,8 +11,26 @@ const Signup = () => {
     const img = form.img.value;
     const password = form.password.value;
     const name = form.name.value;
-    console.log(email, name, password, img);
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        handleUpdateProfileUser(name, img);
+      })
+      //Showed error message if user doesnt give valid input
+      .catch((error) => console.log(error.message));
+
+    const handleUpdateProfileUser = (name, img) => {
+      const profile = {
+        displayName: name,
+        photoURL: img,
+      };
+      updateUserProfile(profile)
+        .then(() => {})
+        .catch((err) => console.error(err));
+    };
   };
+
   return (
     <div>
       <div className="hero  bg-base-200 my-10 py-5">
