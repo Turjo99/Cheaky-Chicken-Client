@@ -41,6 +41,11 @@ const NavBar = () => {
                   <li>Menu</li>
                 </Link>
               </li>
+              <li tabIndex={0}>
+                <Link to={"/blogs"}>
+                  <li>Blogs</li>
+                </Link>
+              </li>
               {user?.uid ? (
                 <>
                   <li tabIndex={0}>
@@ -84,6 +89,11 @@ const NavBar = () => {
             <li tabIndex={0}>
               <Link to={"/allItems"}>
                 <li>Menu</li>
+              </Link>
+            </li>
+            <li tabIndex={0}>
+              <Link to={"/Blogs"}>
+                <li>Blogs</li>
               </Link>
             </li>
             {user?.uid ? (
