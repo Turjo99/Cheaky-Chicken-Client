@@ -1,11 +1,12 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
-
+const Provider = new GoogleAuthProvider();
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, googleSignIn } = useContext(AuthContext);
   const login = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -23,6 +24,15 @@ const Login = () => {
       // handling error message
       .catch((error) => console.log(error.message));
   };
+  const handleGoogleSignIn = () => {
+    googleSignIn(Provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error.message));
+  };
+
   return (
     <div>
       <div className="hero  bg-base-200 my-10 py-5">
@@ -34,9 +44,9 @@ const Login = () => {
               className=" w-11/12 mx-auto h-fit"
             />
           </div>
-          <div className="  w-full  shadow-2xl bg-base-100 ">
+          <div className="  w-full  shadow-2xl bg-base-100 p-10">
             <h1 className="text-5xl font-bold text-center">Login now!</h1>
-            <form className="" onSubmit={login}>
+            <form className="py-10" onSubmit={login}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-5xl">Email</span>
@@ -71,6 +81,14 @@ const Login = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
             </form>
+            <p className="text-5xl my-5 text-center">or</p>
+
+            <button
+              className="btn btn-secondary text-2xl w-full p-5 h-14"
+              onClick={handleGoogleSignIn}
+            >
+              Sign In With Google
+            </button>
           </div>
         </div>
       </div>

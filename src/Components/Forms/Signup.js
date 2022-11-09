@@ -1,8 +1,10 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/UserContext";
-
+const Provider = new GoogleAuthProvider();
 const Signup = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, googleSignIn } =
+    useContext(AuthContext);
   const register = (event) => {
     event.preventDefault();
 
@@ -30,10 +32,18 @@ const Signup = () => {
         .catch((err) => console.error(err));
     };
   };
+  const handleGoogleSignIn = () => {
+    googleSignIn(Provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error.message));
+  };
 
   return (
     <div>
-      <div className="hero  bg-base-200 my-10 py-5">
+      <div className="hero  bg-base-200 mb-10 py-5">
         <div className="hero-content flex-col lg:flex-row md:flex-row justify-center">
           <div className="text-center lg:text-left ">
             <img
@@ -106,6 +116,13 @@ const Signup = () => {
                 </button>
               </div>
             </form>
+            <p className="text-5xl my-5 text-center">or</p>
+            <button
+              className="btn btn-secondary text-2xl w-full p-5 h-14"
+              onClick={handleGoogleSignIn}
+            >
+              Sign In With Google
+            </button>
           </div>
         </div>
       </div>

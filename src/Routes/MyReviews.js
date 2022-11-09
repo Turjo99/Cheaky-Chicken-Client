@@ -33,9 +33,9 @@ const MyReviews = () => {
   console.log(userReview);
 
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="overflow-x-auto ">
       {console.log(userReview)}
-      <table className="table w-full text-5xl">
+      <table className="table lg:w-full text-5xl sm:w-auto ">
         <thead>
           <tr>
             <th></th>
