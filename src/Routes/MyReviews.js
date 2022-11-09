@@ -35,7 +35,7 @@ const MyReviews = () => {
   return (
     <div className="overflow-x-auto w-full">
       {console.log(userReview)}
-      <table className="table w-full">
+      <table className="table w-full text-5xl">
         <thead>
           <tr>
             <th></th>

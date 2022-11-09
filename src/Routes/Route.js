@@ -7,6 +7,7 @@ import AllItem from "../Components/Items/AllItem";
 import ItemDetail from "../Components/Items/ItemDetail";
 import Main from "../Components/Main/Main";
 import MyReviews from "./MyReviews";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -37,11 +38,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myreviews",
-        element: <MyReviews></MyReviews>,
+        element: (
+          <PrivateRoute>
+            <MyReviews></MyReviews>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addItem",
-        element: <AddItem></AddItem>,
+        element: (
+          <PrivateRoute>
+            <AddItem></AddItem>
+          </PrivateRoute>
+        ),
       },
     ],
   },

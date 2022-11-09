@@ -1,6 +1,8 @@
+import { data } from "autoprefixer";
 import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
+import ItemReview from "./ItemReview";
 
 const ItemDetail = () => {
   const { user } = useContext(AuthContext);
@@ -10,6 +12,7 @@ const ItemDetail = () => {
   const { img, _id, description, name, price } = item;
   console.log(item);
   const itemID = _id;
+  const [review, setReview] = useState([]);
 
   const handleReview = (event) => {
     event.preventDefault();
@@ -42,7 +45,9 @@ const ItemDetail = () => {
       });
   };
   useEffect(() => {
-    fetch(``);
+    fetch(`http://localhost:5000/reviews?itemID=${itemID}`)
+      .then((res) => res.json())
+      .then((data) => setReview(data));
   }, []);
   // const handleBlur = (event) => {
   //   const field = event.target.name;
@@ -111,6 +116,29 @@ const ItemDetail = () => {
           <button className="btn btn-primary">Submit</button>
         </div>
       </form>
+      <h1 className="text-8xl my-6">Reviews</h1>
+      <div className="overflow-x-auto w-full">
+        {console.log(review)}
+        <table className="table w-full text-5xl">
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Item Name</th>
+              <th>Review</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {review.map((singlereview) => (
+              <ItemReview
+                key={singlereview._id}
+                review={singlereview}
+              ></ItemReview>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

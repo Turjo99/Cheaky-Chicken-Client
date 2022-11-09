@@ -8,15 +8,12 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
   if (loading) {
     return (
-      <div>
+      <div class="flex justify-center items-center">
         <div
-          className="
-      spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0
-        text-yellow-500
-      "
+          class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
           role="status"
         >
-          <span className="visually-hidden">Loading...</span>
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
     );
