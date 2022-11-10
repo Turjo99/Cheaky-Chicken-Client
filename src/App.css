@@ -8,9 +8,14 @@ button {
   font-family: "Kaushan Script", cursive;
   font-family: "Raleway", sans-serif;
 }
-h1 {
+h1,
+th,
+td {
   font-family: "Kaushan Script", cursive;
   font-family: "Raleway", sans-serif;
+}
+td {
+  font-size: 30px;
 }
 .App-logo {
   height: 40vmin;

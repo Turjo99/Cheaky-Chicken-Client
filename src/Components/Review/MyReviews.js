@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const MyReviews = () => {
   const notify = () => toast("Review Deleted!");
   useTitle("My Reviews");
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [userReview, setUserReview] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/user?email=${user?.email}`, {
@@ -19,7 +19,7 @@ const MyReviews = () => {
     })
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
-          return logOut();
+          return logout();
         }
         return res.json();
       })

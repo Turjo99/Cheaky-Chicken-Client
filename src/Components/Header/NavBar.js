@@ -59,7 +59,7 @@ const NavBar = () => {
                     </Link>
                   </li>
                   <li tabIndex={0} onClick={handleLogOut}>
-                    <Link to={"/allItems"}>
+                    <Link to={"/"}>
                       <li>Logout</li>
                     </Link>
                   </li>
@@ -109,7 +109,7 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li tabIndex={0} onClick={handleLogOut}>
-                  <Link to={"/allItems"}>
+                  <Link to={"/"}>
                     <li>Logout</li>
                   </Link>
                 </li>

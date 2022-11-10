@@ -1,8 +1,9 @@
 import React from "react";
 
 const ItemReview = ({ review }) => {
-  const { name, price, userReview, userName } = review;
-  console.log(review);
+  const { name, price, userReview, userName, date } = review;
+
+  console.log(date);
   return (
     <tr>
       <td>
@@ -19,9 +20,7 @@ const ItemReview = ({ review }) => {
         <span className="badge badge-ghost badge-sm text-3xl">${price}</span>
       </td>
       <td>{userReview}</td>
-      <th>
-        <button className="btn btn-ghost btn-xs"></button>
-      </th>
+      <td>{date}</td>
     </tr>
   );
 };

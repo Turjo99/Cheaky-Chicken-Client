@@ -26,6 +26,11 @@ const ItemDetail = () => {
     const userName = event.target.name.value;
     const email = user?.email || "unregistered";
     const userReview = event.target.review.value;
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${day}-${month}-${year}`;
 
     console.log(Date.parse);
     console.log(userName, userReview);
@@ -35,7 +40,7 @@ const ItemDetail = () => {
       name,
       price,
       userName,
-
+      date: currentDate,
       userReview,
     };
     fetch("http://localhost:5000/reviews", {
@@ -138,9 +143,9 @@ const ItemDetail = () => {
         </>
       ) : (
         <>
-          <h1 className="text-center lg:text-6xl text-3xl">
+          <h1 className="text-center  text-3xl my-10">
             Please{" "}
-            <Link className=" hover:after:text-slate-100" to={"/login"}>
+            <Link className=" hover:text-white" to={"/login"}>
               Login
             </Link>{" "}
             to Post Your review
@@ -148,7 +153,7 @@ const ItemDetail = () => {
         </>
       )}
 
-      <h1 className="lg:text-6xl text-3xl">Reviews</h1>
+      <h1 className="lg:text-6xl text-3xl text-center my-5">Reviews</h1>
       {review.length ? (
         <>
           <div className="overflow-x-auto w-full">
@@ -159,8 +164,8 @@ const ItemDetail = () => {
                   <th>User Name</th>
                   <th>Item Name</th>
                   <th>Review</th>
-                  <th>Email</th>
-                  <th></th>
+
+                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
