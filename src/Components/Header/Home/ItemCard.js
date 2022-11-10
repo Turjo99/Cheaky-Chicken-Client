@@ -20,7 +20,7 @@ const ItemCard = ({ item }) => {
           <h2 className="card-title text-5xl">{name}</h2>
           <p className="card-title text-3xl">{description}</p>
           <Link to={`/allItems/${_id}`} className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">See details</button>
           </Link>
         </div>
       </div>

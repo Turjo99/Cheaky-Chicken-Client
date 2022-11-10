@@ -5,7 +5,7 @@ import ItemCard from "./ItemCard";
 const Items = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/items")
+    fetch("https://server-sooty-two.vercel.app/items")
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);

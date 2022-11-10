@@ -17,16 +17,6 @@ const UserReview = ({ review, handleDelete, handleUpdateReview }) => {
       </th>
       <td>
         <div className="flex items-center space-x-3">
-          {/* <div className="avatar">
-            <div className="rounded w-24 h-24">
-              {orderService?.img && (
-                <img
-                  src={orderService.img}
-                  alt="Avatar Tailwind CSS Component"
-                />
-              )}
-            </div>
-          </div> */}
           <div>
             <div className="font-bold">{userName}</div>
             {/* <div className="text-sm opacity-50">{phone}</div> */}
@@ -40,14 +30,20 @@ const UserReview = ({ review, handleDelete, handleUpdateReview }) => {
       </td>
       <td>{userReview}</td>
       <td className="flex justify-center items-center">
-        <a
-          href="#my-modal-2"
+        <label
+          htmlFor={`my-modal-${_id}`}
           className="bg-gray-400 text-black px-2 rounded-md active:scale-95 active:bg-blue-300"
         >
           Update
-        </a>
-        {/* modal starts */}
-        <div className="modal" id="my-modal-2">
+        </label>
+
+        {/* Put this part before </body> tag */}
+        <input
+          type="checkbox"
+          id={`my-modal-${_id}`}
+          className="modal-toggle"
+        />
+        <div className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg text-center">Edit your review</h3>
             <input
@@ -56,13 +52,13 @@ const UserReview = ({ review, handleDelete, handleUpdateReview }) => {
               onChange={(e) => setupdatedReview(e.target.value)}
             ></input>
             <div className="modal-action">
-              <a
+              <label
                 onClick={() => handleUpdateReview(_id, updatedReview)}
-                href="#"
-                className="btn mx-auto"
+                htmlFor={`my-modal-${_id}`}
+                className="btn"
               >
                 Update
-              </a>
+              </label>
             </div>
           </div>
         </div>

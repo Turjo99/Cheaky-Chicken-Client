@@ -43,7 +43,7 @@ const ItemDetail = () => {
       date: currentDate,
       userReview,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://server-sooty-two.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -59,7 +59,7 @@ const ItemDetail = () => {
       });
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?itemID=${itemID}`)
+    fetch(`https://server-sooty-two.vercel.app/reviews?itemID=${itemID}`)
       .then((res) => res.json())
       .then((data) => setReview(data));
   }, []);

@@ -1,11 +1,12 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 const Provider = new GoogleAuthProvider();
 const Signup = () => {
+  // const [loading, setLoading] = useState(true);
   useTitle("SignUp");
-  const { createUser, updateUserProfile, googleSignIn } =
+  const { createUser, updateUserProfile, googleSignIn, loading } =
     useContext(AuthContext);
   const register = (event) => {
     event.preventDefault();
@@ -19,8 +20,27 @@ const Signup = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("https://server-sooty-two.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            // local storage is the easiest but not the best place to store jwt token
+            localStorage.setItem("chicken-token", data.token);
+          });
+
         handleUpdateProfileUser(name, img);
       })
+
       //Showed error message if user doesnt give valid input
       .catch((error) => console.log(error.message));
 
@@ -38,13 +58,44 @@ const Signup = () => {
     googleSignIn(Provider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
+        const currentUser = {
+          email: user.email,
+        };
+
+        console.log(currentUser);
+
+        // get jwt token
+        fetch("https://server-sooty-two.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            // local storage is the easiest but not the best place to store jwt token
+            localStorage.setItem("chicken-token", data.token);
+          });
       })
-      .catch((error) => console.error(error.message));
+      .catch((error) => console.log(error));
   };
 
   return (
     <div>
+      {loading && (
+        <div class="flex justify-center items-center">
+          <div
+            class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <div className="hero  bg-base-200 mb-10 py-5">
         <div className="hero-content flex-col lg:flex-row md:flex-row justify-center">
           <div className="text-center lg:text-left ">
@@ -97,20 +148,12 @@ const Signup = () => {
                   <span className="label-text text-5xl">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="password"
                   className="input input-bordered text-5xl"
                   name="password"
                   required
                 />
-                <label className="label">
-                  <a
-                    href="#"
-                    className="label-text-alt link link-hover text-5xl"
-                  >
-                    Forgot password?
-                  </a>
-                </label>
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">

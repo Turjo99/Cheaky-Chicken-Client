@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
         path: "/allItems/:id",
         element: <ItemDetail></ItemDetail>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allItems/${params.id}`),
+          fetch(`https://server-sooty-two.vercel.app/allItems/${params.id}`),
       },
       {
         path: "/blogs",

@@ -12,7 +12,7 @@ const MyReviews = () => {
   const { user, logout } = useContext(AuthContext);
   const [userReview, setUserReview] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/user?email=${user?.email}`, {
+    fetch(`https://server-sooty-two.vercel.app/user?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("chicken-token")}`,
       },
@@ -32,7 +32,7 @@ const MyReviews = () => {
       "Are you sure, you want to cancel this order"
     );
     if (proceed) {
-      fetch(`http://localhost:5000/user/${id}`, {
+      fetch(`https://server-sooty-two.vercel.app/user/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -46,7 +46,7 @@ const MyReviews = () => {
     }
   };
   const handleUpdateReview = (id, updatedReview) => {
-    fetch(`http://localhost:5000/user/${id}`, {
+    fetch(`https://server-sooty-two.vercel.app/user/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

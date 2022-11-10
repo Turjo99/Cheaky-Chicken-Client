@@ -22,6 +22,7 @@ const UserContext = ({ children }) => {
   const [loading, setLoading] = useState(true); //Loading State for avoiding the reload issue on private route
   // for creating user
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // for sign in user with email and password

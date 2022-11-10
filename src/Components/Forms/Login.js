@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
@@ -7,10 +7,11 @@ import { AuthContext } from "../Context/UserContext";
 const Provider = new GoogleAuthProvider();
 
 const Login = () => {
+  // const [loading, setLoading] = useState(true);
   useTitle("login");
   const navigate = useNavigate();
   const location = useLocation();
-  const { loginUser, googleSignIn } = useContext(AuthContext);
+  const { loginUser, googleSignIn, loading } = useContext(AuthContext);
   const login = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -26,11 +27,11 @@ const Login = () => {
         const currentUser = {
           email: user.email,
         };
-
+        // setLoading(false);
         console.log(currentUser);
 
         // get jwt token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://server-sooty-two.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -40,6 +41,7 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+
             // local storage is the easiest but not the best place to store jwt token
             localStorage.setItem("chicken-token", data.token);
             navigate(from, { replace: true });
@@ -59,7 +61,7 @@ const Login = () => {
         console.log(currentUser);
 
         // get jwt token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://server-sooty-two.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -69,6 +71,7 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+
             // local storage is the easiest but not the best place to store jwt token
             localStorage.setItem("chicken-token", data.token);
           });
@@ -78,6 +81,16 @@ const Login = () => {
 
   return (
     <div>
+      {loading && (
+        <div class="flex justify-center items-center">
+          <div
+            class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <div className="hero  bg-base-200 my-10 py-5">
         <div className="hero-content flex-col lg:flex-row md:flex-row justify-center">
           <div className="text-center lg:text-left ">
@@ -106,19 +119,11 @@ const Login = () => {
                   <span className="label-text text-5xl">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="password"
                   className="input input-bordered text-5xl"
                   name="password"
                 />
-                <label className="label">
-                  <a
-                    href="#"
-                    className="label-text-alt link link-hover text-5xl"
-                  >
-                    Forgot password?
-                  </a>
-                </label>
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
