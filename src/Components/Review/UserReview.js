@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
-const UserReview = ({ review, handleDelete }) => {
+const UserReview = ({ review, handleDelete, handleUpdateReview }) => {
   const { _id, itemID, price, userReview, userName, name } = review;
+  const [updatedReview, setupdatedReview] = useState(userReview);
+
   console.log(price, userReview, userName, name);
 
   return (
@@ -37,9 +39,35 @@ const UserReview = ({ review, handleDelete }) => {
         <span className="badge badge-ghost badge-sm">${price}</span>
       </td>
       <td>{userReview}</td>
-      <th>
-        <button className="btn btn-ghost btn-xs"></button>
-      </th>
+      <td className="flex justify-center items-center">
+        <a
+          href="#my-modal-2"
+          className="bg-gray-400 text-black px-2 rounded-md active:scale-95 active:bg-blue-300"
+        >
+          Update
+        </a>
+        {/* modal starts */}
+        <div className="modal" id="my-modal-2">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg text-center">Edit your review</h3>
+            <input
+              className="p-4 my-5 text-center w-full  border-b-2 bg-inherit"
+              defaultValue={`${userReview}`}
+              onChange={(e) => setupdatedReview(e.target.value)}
+            ></input>
+            <div className="modal-action">
+              <a
+                onClick={() => handleUpdateReview(_id, updatedReview)}
+                href="#"
+                className="btn mx-auto"
+              >
+                Update
+              </a>
+            </div>
+          </div>
+        </div>
+        {/* modal ends */}
+      </td>
     </tr>
   );
 };

@@ -45,6 +45,27 @@ const MyReviews = () => {
         });
     }
   };
+  const handleUpdateReview = (id, updatedReview) => {
+    fetch(`http://localhost:5000/user/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ updatedReview: updatedReview }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          const remainingReviews = userReview.filter((rvw) => rvw._id !== id);
+          const reviewToUpdate = userReview.find((rvw) => rvw._id === id);
+          reviewToUpdate.userReview = updatedReview;
+          const newUserReviews = [reviewToUpdate, ...remainingReviews];
+          setUserReview(newUserReviews);
+        }
+        console.log(data);
+      });
+  };
+
   console.log(userReview);
 
   return (
@@ -58,7 +79,7 @@ const MyReviews = () => {
             <th>User Name</th>
             <th>Item</th>
             <th>Review</th>
-            <th></th>
+            <th>Update</th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +88,7 @@ const MyReviews = () => {
               key={user._id}
               review={review}
               handleDelete={handleDelete}
+              handleUpdateReview={handleUpdateReview}
             ></UserReview>
           ))}
         </tbody>
