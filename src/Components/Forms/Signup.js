@@ -1,8 +1,10 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
+import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 const Provider = new GoogleAuthProvider();
 const Signup = () => {
+  useTitle("SignUp");
   const { createUser, updateUserProfile, googleSignIn } =
     useContext(AuthContext);
   const register = (event) => {

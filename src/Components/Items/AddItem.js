@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../../hooks/useTitle";
 
 const AddItem = () => {
+  useTitle("Add Item");
   const handleAddItem = (event) => {
     event.preventDefault();
     const name = event.target.name.value;

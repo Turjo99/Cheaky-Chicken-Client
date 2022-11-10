@@ -7,7 +7,8 @@ import AllItem from "../Components/Items/AllItem";
 import Blog from "../Components/Items/Blog";
 import ItemDetail from "../Components/Items/ItemDetail";
 import Main from "../Components/Main/Main";
-import MyReviews from "./MyReviews";
+import MyReviews from "../Components/Review/MyReviews";
+
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([

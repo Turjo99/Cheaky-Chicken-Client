@@ -1,6 +1,7 @@
 import { data } from "autoprefixer";
 import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 import ItemReview from "./ItemReview";
 
@@ -10,6 +11,7 @@ const ItemDetail = () => {
   // const [review, setReview] = useState({});
   const item = useLoaderData();
   const { img, _id, description, name, price } = item;
+  useTitle(`${name}`);
   console.log(item);
   const itemID = _id;
   const [review, setReview] = useState([]);

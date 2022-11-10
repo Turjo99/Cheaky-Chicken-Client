@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import useTitle from "../../hooks/useTitle";
 import ItemCard from "../Header/Home/ItemCard";
 
 const AllItem = () => {
+  useTitle("Menu");
   const [items, setItems] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/allItems")
