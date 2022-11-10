@@ -6,11 +6,20 @@ import UserReview from "./UserReview";
 
 const MyReviews = () => {
   useTitle("My Reviews");
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [userReview, setUserReview] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/user?email=${user?.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/user?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("chicken-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return logOut();
+        }
+        return res.json();
+      })
       .then((data) => {
         setUserReview(data);
       });
