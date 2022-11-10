@@ -4,8 +4,11 @@ import { Link, useLoaderData } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 import ItemReview from "./ItemReview";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ItemDetail = () => {
+  const notify = () => toast("Thanks for your review!");
   const { user } = useContext(AuthContext);
 
   // const [review, setReview] = useState({});
@@ -23,6 +26,8 @@ const ItemDetail = () => {
     const userName = event.target.name.value;
     const email = user?.email || "unregistered";
     const userReview = event.target.review.value;
+
+    console.log(Date.parse);
     console.log(userName, userReview);
     const reviews = {
       itemID,
@@ -44,7 +49,7 @@ const ItemDetail = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          alert("Thanks for your review");
+          notify();
         }
       });
   };
@@ -66,8 +71,8 @@ const ItemDetail = () => {
       <div className="">
         <img src={img} className="object-contain mx-auto lg:w-2/3" alt="" />
         <div className="text-center">
-          <h1 className="text-8xl my-6">{name}</h1>
-          <p className="text-5xl">{description}</p>
+          <h1 className="lg:text-6xl my-6 text-3xl">{name}</h1>
+          <p className="text-5xl w=full">{description}</p>
           <div className="my-6 flex justify-around ">
             <div className="text-4xl">Price: ${price}</div>
             <div className="text-4xl">Rating {item?.rating}</div>
@@ -91,6 +96,7 @@ const ItemDetail = () => {
                     placeholder="Jhankar Mahbub"
                     className="input input-bordered text-4xl"
                     name="name"
+                    required
                     // onBlur={handleBlur}
                   />
                 </label>
@@ -106,6 +112,7 @@ const ItemDetail = () => {
                     defaultValue={user?.email}
                     className="input input-bordered text-4xl"
                     name="email"
+                    required
                     // onBlur={handleBlur}
                   />
                 </label>
@@ -116,17 +123,22 @@ const ItemDetail = () => {
                 className="textarea w-full  textarea-secondary text-4xl"
                 placeholder="your Review"
                 name="review"
+                required
                 // onBlur={handleBlur}
               ></textarea>
             </div>
+
             <div className="text-center">
               <button className="btn btn-primary">Submit</button>
+              <div>
+                <ToastContainer />
+              </div>
             </div>
           </form>
         </>
       ) : (
         <>
-          <h1 className="text-center text-8xl">
+          <h1 className="text-center lg:text-6xl text-3xl">
             Please{" "}
             <Link className=" hover:after:text-slate-100" to={"/login"}>
               Login
@@ -136,7 +148,7 @@ const ItemDetail = () => {
         </>
       )}
 
-      <h1 className="text-8xl my-6">Reviews</h1>
+      <h1 className="lg:text-6xl text-3xl">Reviews</h1>
       {review.length ? (
         <>
           <div className="overflow-x-auto w-full">

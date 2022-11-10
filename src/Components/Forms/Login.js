@@ -3,7 +3,9 @@ import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
+
 const Provider = new GoogleAuthProvider();
+
 const Login = () => {
   useTitle("login");
   const navigate = useNavigate();

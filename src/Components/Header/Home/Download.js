@@ -12,10 +12,10 @@ const Download = () => {
               alt="A cat"
             />
           </div>
-          <div class="p-8 w-full">
-            <div class="uppercase text-5xl font-extrabold">
+          <div class="p-8 w-full my-auto">
+            <h1 class="uppercase text-5xl font-extrabold">
               Download our mobile app
-            </div>
+            </h1>
             <img
               src="https://freepngimg.com/thumb/android/67015-play-google-app-store-android-free-transparent-image-hd.png"
               alt=""

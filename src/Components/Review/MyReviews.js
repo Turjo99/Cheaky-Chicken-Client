@@ -3,8 +3,11 @@ import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 
 import UserReview from "./UserReview";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyReviews = () => {
+  const notify = () => toast("Review Deleted!");
   useTitle("My Reviews");
   const { user, logOut } = useContext(AuthContext);
   const [userReview, setUserReview] = useState([]);
@@ -35,7 +38,7 @@ const MyReviews = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            alert("deleted successfully");
+            notify();
             const remaining = userReview.filter((rvw) => rvw._id !== id);
             setUserReview(remaining);
           }
@@ -46,6 +49,7 @@ const MyReviews = () => {
 
   return (
     <div className="overflow-x-auto ">
+      <ToastContainer />
       {console.log(userReview)}
       <table className="table lg:w-full text-5xl sm:w-auto ">
         <thead>

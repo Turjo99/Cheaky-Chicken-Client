@@ -1,7 +1,10 @@
 import React from "react";
 import useTitle from "../../hooks/useTitle";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddItem = () => {
+  const notify = () => toast("Product Added successfully!");
   useTitle("Add Item");
   const handleAddItem = (event) => {
     event.preventDefault();
@@ -27,13 +30,14 @@ const AddItem = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          alert("Product added successfully");
+          notify();
         }
       });
   };
 
   return (
     <div>
+      <ToastContainer />
       <form
         onSubmit={handleAddItem}
         className="w-full max-w-sm mx-auto text-5xl"
