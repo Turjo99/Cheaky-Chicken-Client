@@ -1,6 +1,6 @@
 import { data } from "autoprefixer";
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 import ItemReview from "./ItemReview";
@@ -15,6 +15,8 @@ const ItemDetail = () => {
   console.log(item);
   const itemID = _id;
   const [review, setReview] = useState([]);
+  const length = review.length;
+  console.log(length);
 
   const handleReview = (event) => {
     event.preventDefault();
@@ -72,75 +74,101 @@ const ItemDetail = () => {
           </div>
         </div>
       </div>
-      <form onSubmit={handleReview} className="reviews">
-        <h1 className="text-center text-6xl my-8">Add a Review</h1>
-        <div className="lg:flex justify-center text-4xl">
-          <div className="form-control mr-7 ">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
-            <label className="input-group ">
-              <span>Name</span>
-              <input
-                type="text"
-                placeholder="Jhankar Mahbub"
-                className="input input-bordered text-4xl"
-                name="name"
+
+      {user?.uid ? (
+        <>
+          <form onSubmit={handleReview} className="reviews">
+            <h1 className="text-center text-6xl my-8">Add a Review</h1>
+            <div className="lg:flex justify-center text-4xl">
+              <div className="form-control mr-7 ">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <label className="input-group ">
+                  <span>Name</span>
+                  <input
+                    type="text"
+                    placeholder="Jhankar Mahbub"
+                    className="input input-bordered text-4xl"
+                    name="name"
+                    // onBlur={handleBlur}
+                  />
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <label className="input-group">
+                  <span>Email</span>
+                  <input
+                    type="email"
+                    defaultValue={user?.email}
+                    className="input input-bordered text-4xl"
+                    name="email"
+                    // onBlur={handleBlur}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="text-center my-8">
+              <textarea
+                className="textarea w-full  textarea-secondary text-4xl"
+                placeholder="your Review"
+                name="review"
                 // onBlur={handleBlur}
-              />
-            </label>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <label className="input-group">
-              <span>Email</span>
-              <input
-                type="email"
-                defaultValue={user?.email}
-                className="input input-bordered text-4xl"
-                name="email"
-                // onBlur={handleBlur}
-              />
-            </label>
-          </div>
-        </div>
-        <div className="text-center my-8">
-          <textarea
-            className="textarea w-full  textarea-secondary text-4xl"
-            placeholder="your Review"
-            name="review"
-            // onBlur={handleBlur}
-          ></textarea>
-        </div>
-        <div className="text-center">
-          <button className="btn btn-primary">Submit</button>
-        </div>
-      </form>
+              ></textarea>
+            </div>
+            <div className="text-center">
+              <button className="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </>
+      ) : (
+        <>
+          <h1 className="text-center text-8xl">
+            Please{" "}
+            <Link className=" hover:after:text-slate-100" to={"/login"}>
+              Login
+            </Link>{" "}
+            to Post Your review
+          </h1>
+        </>
+      )}
+
       <h1 className="text-8xl my-6">Reviews</h1>
-      <div className="overflow-x-auto w-full">
-        {console.log(review)}
-        <table className="table w-full text-5xl">
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Item Name</th>
-              <th>Review</th>
-              <th>Email</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {review.map((singlereview) => (
-              <ItemReview
-                key={singlereview._id}
-                review={singlereview}
-              ></ItemReview>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {review.length ? (
+        <>
+          <div className="overflow-x-auto w-full">
+            {console.log(review)}
+            <table className="table w-full text-5xl">
+              <thead>
+                <tr>
+                  <th>User Name</th>
+                  <th>Item Name</th>
+                  <th>Review</th>
+                  <th>Email</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {review.map((singlereview) => (
+                  <ItemReview
+                    key={singlereview._id}
+                    review={singlereview}
+                  ></ItemReview>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : (
+        <>
+          <h1 className="text-5xl text-center text-slate-200">
+            No Reviews Yet
+          </h1>
+        </>
+      )}
     </div>
   );
 };
