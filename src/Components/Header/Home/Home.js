@@ -1,3 +1,4 @@
+import Download from "./Download";
 import Features from "./Features";
 import Hero from "./Hero";
 
@@ -10,6 +11,7 @@ const Home = () => {
 
       <Items></Items>
       <Features></Features>
+      <Download></Download>
     </div>
   );
 };
