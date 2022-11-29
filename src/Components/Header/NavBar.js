@@ -4,6 +4,53 @@ import { AuthContext } from "../Context/UserContext";
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
+  const menuItem = (
+    <>
+      <li tabIndex={0}>
+        <Link to={"/allItems"}>
+          <li>Menu</li>
+        </Link>
+      </li>
+      <li tabIndex={0}>
+        <Link to={"/blogs"}>
+          <li>Blogs</li>
+        </Link>
+      </li>
+      {user?.uid ? (
+        <>
+          <li tabIndex={0}>
+            <Link to={"/addItem"}>
+              <li>Add a Item</li>
+            </Link>
+          </li>
+          <li tabIndex={0}>
+            <Link to={"/myreviews"}>
+              <li>My Reviews</li>
+            </Link>
+          </li>
+          <li tabIndex={0} onClick={handleLogOut}>
+            <Link to={"/"}>
+              <li>Logout</li>
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li tabIndex={0}>
+            <Link to={"/login"}>
+              <li>Login</li>
+            </Link>
+          </li>
+          <li tabIndex={0}>
+            <Link to={"/signup"}>
+              <li>Signup</li>
+            </Link>
+          </li>
+        </>
+      )}
+    </>
+  );
+
   const handleLogOut = () => {
     logout()
       .then(() => {
@@ -34,50 +81,9 @@ const NavBar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-2xl"
             >
-              <li tabIndex={0}>
-                <Link to={"/allItems"}>
-                  <li>Menu</li>
-                </Link>
-              </li>
-              <li tabIndex={0}>
-                <Link to={"/blogs"}>
-                  <li>Blogs</li>
-                </Link>
-              </li>
-              {user?.uid ? (
-                <>
-                  <li tabIndex={0}>
-                    <Link to={"/addItem"}>
-                      <li>Add a Item</li>
-                    </Link>
-                  </li>
-                  <li tabIndex={0}>
-                    <Link to={"/myreviews"}>
-                      <li>My Reviews</li>
-                    </Link>
-                  </li>
-                  <li tabIndex={0} onClick={handleLogOut}>
-                    <Link to={"/"}>
-                      <li>Logout</li>
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li tabIndex={0}>
-                    <Link to={"/login"}>
-                      <li>Login</li>
-                    </Link>
-                  </li>
-                  <li tabIndex={0}>
-                    <Link to={"/signup"}>
-                      <li>Signup</li>
-                    </Link>
-                  </li>
-                </>
-              )}
+              {menuItem}
             </ul>
           </div>
           <Link to={"/"} className="btn btn-ghost normal-case text-5xl">
@@ -85,50 +91,7 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-            <li tabIndex={0}>
-              <Link to={"/allItems"}>
-                <li>Menu</li>
-              </Link>
-            </li>
-            <li tabIndex={0}>
-              <Link to={"/Blogs"}>
-                <li>Blogs</li>
-              </Link>
-            </li>
-            {user?.uid ? (
-              <>
-                <li tabIndex={0}>
-                  <Link to={"/addItem"}>
-                    <li>Add a Item</li>
-                  </Link>
-                </li>
-                <li tabIndex={0}>
-                  <Link to={"/myreviews"}>
-                    <li>My Reviews</li>
-                  </Link>
-                </li>
-                <li tabIndex={0} onClick={handleLogOut}>
-                  <Link to={"/"}>
-                    <li>Logout</li>
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li tabIndex={0}>
-                  <Link to={"/login"}>
-                    <li>Login</li>
-                  </Link>
-                </li>
-                <li tabIndex={0}>
-                  <Link to={"/signup"}>
-                    <li>Signup</li>
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
+          <ul className="menu menu-horizontal p-0">{menuItem}</ul>
         </div>
         <div className="navbar-end">{user?.uid && <>{user.displayName}</>}</div>
       </div>

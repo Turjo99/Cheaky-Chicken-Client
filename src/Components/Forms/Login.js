@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
+import img from "../../img/img1.svg";
 
 const Provider = new GoogleAuthProvider();
 
@@ -91,18 +92,14 @@ const Login = () => {
           </div>
         </div>
       )}
-      <div className="hero  bg-base-200 my-10 py-5">
-        <div className="hero-content flex-col lg:flex-row md:flex-row justify-center">
-          <div className="text-center lg:text-left ">
-            <img
-              src="https://img.freepik.com/free-photo/hands-holding-pizza-slices-high-angle_23-2149872428.jpg?w=1380&t=st=1667976720~exp=1667977320~hmac=aef5d2cb1aec83f42db1f6534d344717801cd7f0af10bb457d4937c6002c6ae3"
-              alt=""
-              className=" w-11/12 mx-auto h-fit"
-            />
+      <div className="hero  bg-base-200">
+        <div className="hero-content flex-col lg:flex-row md:flex-row justify-center my-5">
+          <div className="text-center lg:text-left w-full">
+            <img src={img} alt="" className=" mx-auto h-fit" />
           </div>
           <div className="  w-full  shadow-2xl bg-base-100 p-10">
             <h1 className="text-5xl font-bold text-center">Login now!</h1>
-            <form className="py-10" onSubmit={login}>
+            <form className="" onSubmit={login}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-5xl">Email</span>
@@ -131,12 +128,14 @@ const Login = () => {
             </form>
             <p className="text-5xl my-5 text-center">or</p>
 
-            <button
-              className="btn btn-secondary text-2xl w-full p-5 h-14"
-              onClick={handleGoogleSignIn}
-            >
-              Sign In With Google
-            </button>
+            <div className="text-center">
+              <button
+                className="btn btn-secondary text-center"
+                onClick={handleGoogleSignIn}
+              >
+                Sign In With Google
+              </button>
+            </div>
           </div>
         </div>
       </div>

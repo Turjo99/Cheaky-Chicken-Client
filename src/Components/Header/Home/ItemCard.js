@@ -11,7 +11,7 @@ const ItemCard = ({ item }) => {
           <PhotoProvider>
             <div className="foo">
               <PhotoView src={img}>
-                <img src={img} alt="" />
+                <img src={img} alt="" className=" h-64" />
               </PhotoView>
             </div>
           </PhotoProvider>

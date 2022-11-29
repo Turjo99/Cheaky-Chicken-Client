@@ -2,6 +2,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
+import img1 from "../../img/img1.svg";
 const Provider = new GoogleAuthProvider();
 const Signup = () => {
   // const [loading, setLoading] = useState(true);
@@ -98,12 +99,8 @@ const Signup = () => {
       )}
       <div className="hero  bg-base-200 mb-10 py-5">
         <div className="hero-content flex-col lg:flex-row md:flex-row justify-center">
-          <div className="text-center lg:text-left ">
-            <img
-              src="https://img.freepik.com/free-photo/hands-holding-pizza-slices-high-angle_23-2149872428.jpg?w=1380&t=st=1667976720~exp=1667977320~hmac=aef5d2cb1aec83f42db1f6534d344717801cd7f0af10bb457d4937c6002c6ae3"
-              alt=""
-              className=" w-11/12 mx-auto h-fit"
-            />
+          <div className="text-center lg:text-left w-full">
+            <img src={img1} alt="" className="  mx-auto h-fit" />
           </div>
           <div className="card-body  w-full  shadow-2xl bg-base-100 ">
             <h1 className="text-5xl font-bold text-center">Register now!</h1>
