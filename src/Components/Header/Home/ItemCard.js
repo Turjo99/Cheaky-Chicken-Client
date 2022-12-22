@@ -5,13 +5,13 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 const ItemCard = ({ item }) => {
   const { _id, name, img, description } = item;
   return (
-    <div>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className="">
+      <div className="card card-compact w-96  bg-base-100 shadow-xl ">
         <figure>
           <PhotoProvider>
             <div className="foo">
               <PhotoView src={img}>
-                <img src={img} alt="" className=" h-64" />
+                <img src={img} alt="" className="w-full h-64" />
               </PhotoView>
             </div>
           </PhotoProvider>

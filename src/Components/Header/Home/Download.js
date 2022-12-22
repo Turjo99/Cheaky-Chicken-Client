@@ -1,16 +1,12 @@
 import React from "react";
-
+import img from "../../../img/img2.svg";
 const Download = () => {
   return (
     <div className="w-full container mx-auto my-8">
       <div class="my w-full max-w-md mx-auto bg-slate-900 rounded-xl shadow-md overflow-hidden md:max-w-full">
         <div class="md:flex">
           <div class=" w-full">
-            <img
-              class="  object-cover "
-              src="https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm00NzEtcGYtczEyOS1ibS0wMS1tb2NrdXAucG5n.png"
-              alt="A cat"
-            />
+            <img class="  object-cover " src={img} alt="A cat" className="" />
           </div>
           <div class="p-8 w-full my-auto">
             <h1 class="uppercase text-5xl font-extrabold">

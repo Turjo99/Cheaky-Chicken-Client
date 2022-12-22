@@ -3,8 +3,12 @@ import React, { useContext, useState } from "react";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 import img1 from "../../img/img1.svg";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Provider = new GoogleAuthProvider();
 const Signup = () => {
+  const [signError, setSignError] = useState("");
+  const navigate = useNavigate();
   // const [loading, setLoading] = useState(true);
   useTitle("SignUp");
   const { createUser, updateUserProfile, googleSignIn, loading } =
@@ -34,7 +38,9 @@ const Signup = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-
+            toast.success("Signup Successfull");
+            setSignError("");
+            navigate("/");
             // local storage is the easiest but not the best place to store jwt token
             localStorage.setItem("chicken-token", data.token);
           });
@@ -43,7 +49,7 @@ const Signup = () => {
       })
 
       //Showed error message if user doesnt give valid input
-      .catch((error) => console.log(error.message));
+      .catch((error) => setSignError(error.message));
 
     const handleUpdateProfileUser = (name, img) => {
       const profile = {
@@ -87,7 +93,7 @@ const Signup = () => {
 
   return (
     <div>
-      {loading && (
+      {/* {loading && (
         <div class="flex justify-center items-center">
           <div
             class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
@@ -96,7 +102,7 @@ const Signup = () => {
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-      )}
+      )} */}
       <div className="hero  bg-base-200 mb-10 py-5">
         <div className="hero-content flex-col lg:flex-row md:flex-row justify-center">
           <div className="text-center lg:text-left w-full">
@@ -152,6 +158,7 @@ const Signup = () => {
                   required
                 />
               </div>
+              <p className="text-3xl text-red-600 mt-5">{signError}</p>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
                   Register
@@ -159,10 +166,7 @@ const Signup = () => {
               </div>
             </form>
             <p className="text-5xl my-5 text-center">or</p>
-            <button
-              className="btn btn-secondary text-2xl w-full p-5 h-14"
-              onClick={handleGoogleSignIn}
-            >
+            <button className="btn btn-secondary" onClick={handleGoogleSignIn}>
               Sign In With Google
             </button>
           </div>

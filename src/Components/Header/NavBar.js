@@ -4,6 +4,13 @@ import { AuthContext } from "../Context/UserContext";
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        console.log("Sign Out successfully");
+      })
+      .catch((error) => console.error(error));
+  };
   const menuItem = (
     <>
       <li tabIndex={0}>
@@ -33,6 +40,9 @@ const NavBar = () => {
               <li>Logout</li>
             </Link>
           </li>
+          <li tabIndex={0}>
+            <Link>{user?.uid && <>{user.displayName}</>}</Link>
+          </li>
         </>
       ) : (
         <>
@@ -51,13 +61,6 @@ const NavBar = () => {
     </>
   );
 
-  const handleLogOut = () => {
-    logout()
-      .then(() => {
-        console.log("Sign Out successfully");
-      })
-      .catch((error) => console.error(error));
-  };
   return (
     <div>
       <div className="navbar bg-base-100 text-4xl">
@@ -90,10 +93,9 @@ const NavBar = () => {
             Cheaky Chicken
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal p-0">{menuItem}</ul>
         </div>
-        <div className="navbar-end">{user?.uid && <>{user.displayName}</>}</div>
       </div>
     </div>
   );

@@ -4,10 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../Context/UserContext";
 import img from "../../img/img1.svg";
+import { toast } from "react-hot-toast";
 
 const Provider = new GoogleAuthProvider();
 
 const Login = () => {
+  const [loginError, setLoginError] = useState("");
   // const [loading, setLoading] = useState(true);
   useTitle("login");
   const navigate = useNavigate();
@@ -46,9 +48,10 @@ const Login = () => {
             // local storage is the easiest but not the best place to store jwt token
             localStorage.setItem("chicken-token", data.token);
             navigate(from, { replace: true });
+            toast.success("Successful");
           });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setLoginError(error.message));
   };
   const handleGoogleSignIn = () => {
     googleSignIn(Provider)
@@ -122,6 +125,7 @@ const Login = () => {
                   name="password"
                 />
               </div>
+              <p className=" text-3xl mt-5 text-red-600">{loginError}</p>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
